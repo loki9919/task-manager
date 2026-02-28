@@ -1,0 +1,35 @@
+<div class="task-list-container">
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search tasks by title..."
+      class="search-input"
+    />
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading">Loading tasks...</div>
+
+  <!-- Kanban Board -->
+  <div class="kanban-board" *ngIf="!loading">
+    <div class="kanban-column" *ngFor="let column of columns">
+      <div class="column-header">
+        <h2>{{ column.label }}</h2>
+        <span class="task-count">{{ getFilteredTasks(column.status).length }}</span>
+      </div>
+      <div class="column-body">
+        <app-task-card
+          *ngFor="let task of getFilteredTasks(column.status)"
+          [task]="task"
+          (delete)="onDeleteTask($event)"
+          (statusChange)="onStatusChange($event)"
+        />
+        <div class="empty-column" *ngIf="getFilteredTasks(column.status).length === 0">
+          No tasks
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

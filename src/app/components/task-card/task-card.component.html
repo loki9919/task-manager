@@ -1,0 +1,23 @@
+<div class="task-card" [class]="'status-' + task.status">
+  <div class="card-header">
+    <h3 class="card-title">{{ task.title }}</h3>
+  </div>
+  <p class="card-description" *ngIf="task.description">
+    {{ task.description }}
+  </p>
+  <div class="card-meta">
+    <span class="due-date" *ngIf="task.dueDate">
+      {{ formatDate(task.dueDate) }}
+    </span>
+  </div>
+  <div class="card-actions">
+    <a [routerLink]="['/tasks', task.taskId, 'edit']" class="btn-edit">
+      Edit
+    </a>
+    <button *ngIf="task.status < 2" (click)="onStatusChange(task.status + 1)"
+            class="btn-advance">
+      {{ task.status === 0 ? 'Start' : 'Complete' }}
+    </button>
+    <button (click)="onDelete()" class="btn-delete">Delete</button>
+  </div>
+</div>

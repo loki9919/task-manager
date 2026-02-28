@@ -1,0 +1,43 @@
+<div class="form-container">
+  <h2>{{ isEditMode ? 'Edit Task' : 'New Task' }}</h2>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title *</label>
+      <input id="title" type="text" formControlName="title"
+             placeholder="Enter task title" />
+      <div class="error" *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+        Title is required (max 200 characters)
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"
+                placeholder="Enter task description" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" formControlName="status">
+        <option *ngFor="let opt of statusOptions" [ngValue]="opt.value">
+          {{ opt.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="dueDate">Due Date</label>
+      <input id="dueDate" type="date" formControlName="dueDate" />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-submit" [disabled]="taskForm.invalid">
+        {{ isEditMode ? 'Update Task' : 'Create Task' }}
+      </button>
+      <button type="button" class="btn-cancel" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
