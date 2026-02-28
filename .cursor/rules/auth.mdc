@@ -1,0 +1,11 @@
+---
+description: Authentication conventions
+globs: "**/auth/**,**/*.guard.ts,**/*.interceptor.ts"
+alwaysApply: false
+---
+
+- Use JWT-based authentication
+- Store tokens in localStorage
+- Use Angular HTTP interceptors to attach tokens
+- Use Angular route guards for protected routes
+- Auth endpoints: POST /api/auth/login, POST /api/auth/register

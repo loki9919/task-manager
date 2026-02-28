@@ -1,0 +1,11 @@
+---
+description: Database conventions for PostgreSQL integration
+globs: "**/*.sql,**/db/**,**/*.service.ts"
+alwaysApply: false
+---
+
+- Use PostgreSQL as the database
+- Use the pg npm package for database access
+- Use parameterized queries ($1, $2) to prevent SQL injection
+- Keep database logic in dedicated service files
+- Use environment variables for connection strings
